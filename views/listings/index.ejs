@@ -1,0 +1,181 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+    .navbar-custom {
+        background-color: #f8f9fa;
+    }
+
+    .filter-toggle {
+        display: none;
+    }
+
+    .filters {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .filter {
+        text-align: center;
+        margin-right: 2rem;
+        margin-top: 1rem;
+        opacity: 0.7;
+    }
+
+    .filter:hover {
+        opacity: 1;
+        border-bottom: 0.12rem solid black;
+    }
+
+    .filter p {
+        font-size: 0.9rem;
+    }
+
+    .tax-info {
+        display: none;
+    }
+
+    .tax-toggle {
+        border: 1px solid black;
+        border-radius: 1rem;
+        height: 3.25rem;
+        padding: 1rem;
+        margin-left: 3rem;
+        display: flex;
+        align-items: center;
+    }
+
+    @media (max-width: 1400px) {
+        .tax-toggle{
+            display: none;
+        }
+    }
+    @media (max-width: 1200px) {
+        .ten{
+            display: none;
+        }
+    }
+    @media (max-width: 992px) {
+        .seven{
+            display: none;
+        }
+        .eight{
+            display: none;
+        }
+        .nine {
+            display: none;
+        }
+    }
+    @media (max-width: 700px) {
+        .four{
+            display: none;
+        }
+        
+        .five{display: none;
+        }
+    }
+    @media (max-width: 600px) {
+        .filters {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+        }
+        .container-fluid{
+            display: none;
+        }
+    }
+
+</style>
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-light bg-body-light mt-4">
+    <div class="container-fluid">
+        <button class="navbar-toggler filter-toggle scroll" type="button" data-bs-toggle="collapse" data-bs-target="#filterNavbar" aria-controls="filterNavbar" aria-expanded="false" aria-label="Toggle filters">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="filterNavbar">
+            <div class="filters">
+                <div class="filter one" aria-label="Trending Listings">
+                    <div><i class="fa-solid fa-fire"></i></div>
+                    <p>Trending</p>
+                </div>
+                <div class="filter two" aria-label="Listings with Rooms">
+                    <div><i class="fa-solid fa-bed"></i></div>
+                    <p>Rooms</p>
+                </div>
+                <div class="filter three" aria-label="Iconic Cities">
+                    <div><i class="fa-solid fa-mountain-city"></i></div>
+                    <p>Iconic cities</p>
+                </div>
+                <div class="filter four" aria-label="Mountain Listings">
+                    <div><i class="fa-solid fa-mountain"></i></div>
+                    <p>Mountains</p>
+                </div>
+                <div class="filter five" aria-label="Castle Listings">
+                    <div><i class="fa-brands fa-fort-awesome"></i></div>
+                    <p>Castles</p>
+                </div>
+                <div class="filter six" aria-label="Listings with Amazing Pools">
+                    <div><i class="fa-solid fa-person-swimming"></i></div>
+                    <p>Amazing Pools</p>
+                </div>
+                <div class="filter seven" aria-label="Camping Listings">
+                    <div><i class="fa-solid fa-campground"></i></div>
+                    <p>Camping</p>
+                </div>
+                <div class="filter eight" aria-label="Boat Listings">
+                    <div><i class="fa-solid fa-sailboat"></i></div>
+                    <p>Boats</p>
+                </div>
+                <div class="filter nine" aria-label="Arctic Listings">
+                    <div><i class="fa-regular fa-snowflake"></i></div>
+                    <p>Arctic</p>
+                </div>
+                <div class="filter ten" aria-label="Dome Listings">
+                    <div><i class="fa-solid fa-igloo"></i></div>
+                    <p>Domes</p>
+                </div>
+                
+                <div class="tax-toggle">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" role="switch" type="checkbox" id="flexSwitchCheckDefault" aria-label="Display total after taxes">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Display total after taxes</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="row row-cols-lg-3 row-cols-md-2 mt-3 row-cols-sm-1">
+    <% for(let listing of allListings){ %>
+        <a href="/listings/<%=listing._id %>" class="listing-link">
+            <div class="card col listing-card">
+                <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image" style="height: 20rem">
+                <div class="card-img-overlay"></div>
+                <div class="card-body">
+                    <p class="card-text" style="color: black;">
+                        <b><%= listing.title %></b><br>
+                        <%
+                        let today = new Date();
+                        let date = String(today.getDate()).padStart(2, '0');
+                        let tommorrow = new Date(today)
+                        tommorrow.setDate(today.getDate() + 1);
+                        let dateA = String(tommorrow.getDate()).padStart(2, '0');
+                        let month = Date().split(" ")[1];
+                        if(date == 31){
+                            dateA = 1; 
+                        }
+                        %>
+                        <span style="display: block;">&nbsp;<%= date %>-<%- dateA %> &nbsp;&nbsp;<%= month %></span>
+                        <span class="price-info"><span class=" fw-bold">&nbsp;&#8377;<%= listing.price.toLocaleString("en-IN") %> </span> /night</span>
+                        <i class="tax-info tax-underline ms-1"><i class="rs-sign"><b> &#8377;</i><%= (listing.price*1.18).toLocaleString("en-In") %></b> &nbsp;/night after taxes</i>
+                    </p>
+                </div>
+            </div>
+        </a>     
+    <% } %>
+</div>
+    
+<script src="/js/filter.js"></script>
+<script src="/js/tax.js"></script>
