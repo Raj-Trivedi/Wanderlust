@@ -46,50 +46,16 @@
     }
 
     @media (max-width: 1400px) {
-        .tax-toggle{
-            display: none;
-        }
-    }
-    @media (max-width: 1200px) {
-        .ten{
-            display: none;
-        }
-    }
-    @media (max-width: 992px) {
-        .seven{
-            display: none;
-        }
-        .eight{
-            display: none;
-        }
-        .nine {
-            display: none;
-        }
-    }
-    @media (max-width: 700px) {
-        .four{
-            display: none;
-        }
-        
-        .five{display: none;
-        }
-    }
-    @media (max-width: 600px) {
-        .filters {
-            display: none;
-            flex-direction: column;
-            width: 100%;
-        }
-        .container-fluid{
-            display: none;
+        .remove{
+            display: none !important;
         }
     }
 
 </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-md navbar-light bg-body-light mt-4">
-    <div class="container-fluid">
+<nav class="navbar  navbar-expand-md navbar-light bg-body-light mt-4">
+    <div class="container-fluid remove">
         <button class="navbar-toggler filter-toggle scroll" type="button" data-bs-toggle="collapse" data-bs-target="#filterNavbar" aria-controls="filterNavbar" aria-expanded="false" aria-label="Toggle filters">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -135,16 +101,15 @@
                     <div><i class="fa-solid fa-igloo"></i></div>
                     <p>Domes</p>
                 </div>
-                
-                <div class="tax-toggle">
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" role="switch" type="checkbox" id="flexSwitchCheckDefault" aria-label="Display total after taxes">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Display total after taxes</label>
-                    </div>
-                </div>
-            </div>
+            </div>     
         </div>
     </div>
+        <div class="tax-toggle">
+            <div class="form-check form-switch">
+                <input class="form-check-input" role="switch" type="checkbox" id="flexSwitchCheckDefault" aria-label="Display total after taxes">
+                <label class="form-check-label" for="flexSwitchCheckDefault">Display Price after taxes</label>
+            </div>      
+        </div>
 </nav>
 
 <div class="row row-cols-lg-3 row-cols-md-2 mt-3 row-cols-sm-1">
